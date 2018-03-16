@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="content-header">
+	<h1>
+		Tutor
+        <small> Dashboard</small>
+    </h1>
+<!--     <ol class="breadcrumb">
+    	<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Layout</a></li>
+        <li class="active">Top Navigation</li>
+    </ol> -->
+</section>
+<section class="content center">
+
+	<div class="row">
+
+        <div class="col-lg-4 col-xs-3">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>{{christiaan_total}}</h3>
+
+              <p>Christiaan</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-clock"></i>
+            </div>
+            <a href="{% url 'tutor:calendar' %}"  class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-4 col-xs-3">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>{{sarah_total}}</h3>
+
+              <p>Sarah</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-clock"></i>
+            </div>
+            <a href="{% url 'tutor:calendar' %}"  class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-4 col-xs-3">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>{{total_sessions_today}}</h3>
+
+              <p>Total Sessions Today</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+            <a href="{% url 'tutor:all_sessions' %}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+      </div>
+
+      <!-- LIst -->
+    <div class="row">
+        <div class="col-lg-4 col-xs-3">
+   
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Chrisitaan's Sessions Today</h3>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+            <!-- /.box-header -->
+                <div class="box-body">
+                    <ul class="products-list product-list-in-box">
+                        {% for session in christiaan_sessions %}
+                        <li class="item">
+                            <div class="product-info">
+                                <span class="product-title">{{session.get_from_to_time}}</span>
+                                <span class="product-description">{{session.display}}</span>
+                            </div>
+                        </li>
+                        {% endfor %}
+                        <!-- /.item -->
+                    </ul>
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer text-center">
+                    <a href="{% url 'tutor:all_sessions' %}" class="uppercase">View All Sessions </a>
+                </div>
+                <!-- /.box-footer -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- Col -->
+        <div class="col-lg-4 col-xs-3">
+   
+            <div class="box box-warning">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Sarah's Sessions Today</h3>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+            <!-- /.box-header -->
+                <div class="box-body">
+                    <ul class="products-list product-list-in-box">
+                     {% for session in sarah_sessions %}
+                        <li class="item">
+                            <div class="product-info">
+                                <span class="product-title">{{session.get_from_to_time}}</span>
+                                <span class="product-description">{{session.display}}</span>
+                            </div>
+                        </li>
+                        {% endfor %}
+                        <!-- /.item -->
+                    </ul>
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer text-center">
+                    <a href="{% url 'tutor:all_sessions' %}" class="uppercase">View All Sessions </a>
+                </div>
+                <!-- /.box-footer -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <div class="col-lg-4 col-xs-3">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>{{total_sessions_this_month}} / <sup style="font-size: 20px">  {{total_sessions_last_month}} </sup></h3>
+
+              <p>Total this Month versus last Month </p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+            <a href="{% url 'tutor:all_sessions' %}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+
+    </div>
+    <!-- Row -->
+</section>
+
+{% endblock %}

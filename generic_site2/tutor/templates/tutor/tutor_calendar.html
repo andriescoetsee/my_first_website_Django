@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<section class="content-header">
+	<h1>
+		Tutor
+        <small> Calendar </small>
+    </h1>
+      <ol class="breadcrumb">
+        <div class="col-xs-12 text-center">
+          <li>
+            <button id="export-excel" type="button" class="btn btn-primary btn-flat btn-sm" data-toggle='tooltip' title="Export to Excel">
+<!--                 <i class="fa fa-spin fa-refresh"></i>&nbsp;  -->
+                Export
+            </button>
+          </li>
+        </div>
+<!--     	<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Layout</a></li>
+        <li class="active">Top Navigation</li> -->
+      </ol> 
+</section>
+
+<section class="content">
+
+      {% for message in messages %}
+      <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+        {{ message }}
+      </div>
+      {% endfor %}
+
+      <div class="row">
+        <div class="col-md-3">
+          <!-- /. box  create event-->
+          <div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">Create Event</h3>
+            </div>
+            <div class="box-body">
+
+              <div class="form-group">
+                <label>Student</label>
+                <select id="student" class="form-control select2" style="width: 100%;">
+                  {% for student in students %}
+                    <option value={{student.id}} >{{student.name}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+
+             <div class="form-group">
+                <label>Tutor</label>
+                <select id="tutor" class="form-control select2" style="width: 100%;">
+                  {% for instructor in instructors %}
+                    <option value={{instructor.id}} >{{instructor.name}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+
+             <div class="form-group">
+                <label>Session Type</label>
+                <select id="session_type" class="form-control select2" style="width: 100%;">
+                  {% for lesson_type in lesson_types %}
+                    <option value={{lesson_type.id}} >{{lesson_type.name}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+
+              <!-- time Picker -->
+              <div class="bootstrap-timepicker">
+                <div class="form-group">
+                  <label>From Time:</label>
+
+                  <div class="input-group">
+                    <input type="text" class="form-control timepicker" id="from-time" placeholder="HH:MI">
+
+                    <div class="input-group-addon">
+                      <i class="fa fa-clock-o"></i>
+                    </div>
+                  </div>
+                  <!-- /.input group -->
+                </div>
+                <!-- /.form group -->
+              </div>
+
+              <div class="bootstrap-timepicker">
+                <div class="form-group">
+                  <label>From Time:</label>
+
+                  <div class="input-group">
+                    <input type="text" class="form-control timepicker" id="to-time" placeholder="HH:MI">
+
+                    <div class="input-group-addon">
+                      <i class="fa fa-clock-o"></i>
+                    </div>
+                  </div>
+                  <!-- /.input group -->
+                </div>
+                <!-- /.form group -->
+              </div>
+
+                <div class="btn-group">
+                    <button id="add-new-event" type="button" class="btn btn-primary btn-flat">Add</button>
+                </div>
+                <!-- /btn-group -->
+            </div>
+          </div>
+          <div id="external-events-listing" class="box box-success">
+            <div class="box-header with-border">
+              <h4 class="box-title">Draggable Events</h4>
+            </div>
+            <div class="box-body" >
+              <!-- the events -->
+              <div id="external-events">
+               </div>
+               
+                <div class="checkbox">
+                  <label for="drop-remove">
+                    <input type="checkbox" id="drop-remove">
+                    remove after drop
+                  </label>
+                </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+        </div>
+        <!-- /.col -->
+        <div class="col-md-9">
+          <div class="box box-success">
+            <div class="box-body no-padding">
+              <!-- THE CALENDAR -->
+              <div id="calendar"></div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /. box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+
+{% block scripts %}
+    <!-- block.super will get the content of the block from the parent template -->
+    {{ block.super }}
+    <script src="{% static 'bower_components/moment/moment.js' %}"></script>
+    <script src="{% static 'bower_components/fullcalendar/dist/fullcalendar.min.js' %}"></script>
+
+    <script src="{% static 'myCalendar.js' %}"></script>
+
+{% endblock %}
+
+{% endblock %}

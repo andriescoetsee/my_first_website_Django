@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% block content %}
+
+<nav class="container-fluid fixed-top mySubNavbar">
+  <div class="row">
+    <div class="col col-md-7 myBreadCrumbAnchor">Sign Up
+    </div>
+    <div class="col col-md-3">
+    </div>
+    <div class="col col-md-2">
+    </div>
+</div>
+</nav>
+
+<div class="container myContainerUpdate">
+    <h2>Sign Up</h2>
+    <div style="padding:20px;">
+      <form method="POST">
+          {% csrf_token %}
+          {% bootstrap_form form %}
+          <input type="submit" value="Sign Up" class="btn btn-outline-success">
+        </form>
+    </div>
+</div>
+{% endblock %}
