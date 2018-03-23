@@ -229,7 +229,7 @@ $(document).ready(function () {
               else
               {
 
-                 if (event.scripture.length > 0)
+                 if (event.scripture)
                  {
                     var title = event.scripture + " " + event.note 
                  }
