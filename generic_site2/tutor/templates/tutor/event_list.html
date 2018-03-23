@@ -26,8 +26,8 @@
               <table id="all-sessions" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Student</th>
                   <th>Date</th>
+                  <th>Student</th>
                   <th>Lesson Type</th>
                   <th>Instructor</th>
                 </tr>
@@ -35,8 +35,8 @@
                 <tbody>
                   {% for event in object_list %}
                   <tr>
-                    <td>{{ event.student.name }} {{  event.student.surname }}</td>
                     <td>{{ event.get_date  }} {{ event.get_from_to_time}} </td>
+                    <td>{{ event.student.name }} {{  event.student.surname }}</td>
                     <td>{{ event.lesson_type.name }} </td>
                     <td>{{ event.instructor.name }} {{ event.instructor.surname }}</td>
                   </tr>

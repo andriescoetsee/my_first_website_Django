@@ -13,10 +13,12 @@ class LandingPage(TemplateView, LoginRequiredMixin):
     
     def get(self, request, *args, **kwargs):
 
-        if request.user.has_perm('accounts.tutor_participant') or request.user.has_perm('accounts.is_tutor_admin') :
+        if request.user.is_superuser :
+            return super().get(request, *args, **kwargs)
+        elif request.user.has_perm('accounts.tutor_participant') :
             return HttpResponseRedirect(reverse("tutor:dashboard"))
-            # elif request.user.has_perm('accounts.bible_study_participant') or request.user.has_perm('accounts.is_bible_study_admin') :
-            # 	return return HttpResponseRedirect(reverse("tutor:dashboard"))
+        elif request.user.has_perm('accounts.bible_study_participant') :
+            return HttpResponseRedirect(reverse("bible_study:dashboard"))
         else :
             return super().get(request, *args, **kwargs)
 

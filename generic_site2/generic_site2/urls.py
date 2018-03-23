@@ -25,4 +25,5 @@ urlpatterns = [
 	url(r"^landing/$", views.LandingPage.as_view(), name="landing"),
 	url(r"^thanks/$", views.ThanksPage.as_view(), name="thanks"),
     url(r"^tutor/", include("tutor.urls")),
+    url(r"^bible_study/", include("bible_study.urls")),
 ]

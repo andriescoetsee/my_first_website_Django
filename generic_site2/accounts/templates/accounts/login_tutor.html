@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>GrowLearning | Login</title>
+  <title>Tutor | Login </title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -23,22 +23,13 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="{% url 'home' %}" ><b>GrowLearning</b></a>
+    <a href="{% url 'home' %}" ><b>Tutor</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-
-    {% for message in messages %}
-      <div class="alert alert-danger alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4><i class="icon fa fa-ban"></i> Alert!</h4>
-                {{ message }}
-      </div>
-    {% endfor %}
-
     <p class="login-box-msg">Sign in to start your session</p>
 
-    <form id="login" method="POST"> {% csrf_token %}
+    <form method="POST"> {% csrf_token %}
       <div class="form-group has-feedback">
         <input type="email" class="form-control" placeholder="Email" name="username">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -59,7 +50,7 @@
       </div>
     </form>
      
-     <i class="fa fa-home"></i><a href="{% url 'home' %}"> GrowLearning</a>
+     <i class="fa fa-home"></i><a href="{% url 'home' %}"> GrowLearning Portal </a>
 
 <!-- 
     <a href="#">I forgot my password</a><br>

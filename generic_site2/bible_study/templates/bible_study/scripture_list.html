@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load filter_tags %}
+{% block content %}
+
+<section class="content-header">
+	<h1>
+		Bible Study
+        <small> List </small>
+  </h1>
+</section>
+<section class="content center">
+
+  {% for book_name in books %}
+
+  {% if forloop.counter0|divisibleby:1 %}
+    <div class="row">
+  {% endif %} 
+
+    <div class="col-md-10">
+
+      {% if book_name == next_study_book %}
+        <div class="box box-primary">
+      {% else %}
+        <div class="box box-success collapsed-box">
+       {% endif %}
+
+        <div class="box-header with-border">
+          <h5>
+      		  <strong>{{ book_name }}</strong>
+          </h5>
+          
+          <div class="box-tools pull-right">
+
+            {% if book_name == next_study_book %}
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+            {% else %}
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+            {% endif %}
+            
+          </div>
+          <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+              
+            <div class="row">
+            <div class="col-xs-12">
+            <div class="box">
+            <div class="box-header">
+              <h3 class="box-title"></h3>
+
+              <div class="box-tools">
+                <div class="input-group input-group-sm" style="width: 150px;">
+                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+
+                  <div class="input-group-btn">
+                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+              <table class="table table-hover">
+                <tr>
+                  <th>Title</th>
+                  <th>Passage (notes) </th>
+                  <th>Questions</th>
+                  <th>Status</th>
+                </tr>
+
+                {% for scripture in object_list|book:book_name %}
+                <tr>
+                  <td>{{scripture.title}}</td>
+                  <td>
+                    <a href="{% url 'bible_study:scripture_detail' pk=scripture.pk %}"> {{scripture.book}} {{scripture.passage}} 
+                    </a>
+                  </td>
+                  <td>
+                    <a href="{% url 'bible_study:question_detail' pk=scripture.pk %}"> Questions <i class="fa fa-question-circle" ></i>
+                    </a>
+                  </td>
+                  <td><span class="label {% if scripture.status == 'STUDIED' %} label-success
+                                               {% elif scripture.status == 'OPEN' %} label-warning
+                                               {% elif scripture.status == 'NEXT' %} label-danger
+                                               {% else %} label-primary
+                                               {% endif %}
+                      ">{{scripture.status}}</span></td>
+                </tr>
+                {% endfor %}
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+          </div>
+          </div>
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+    </div>
+    <!-- Col -->
+  {% if forloop.counter0|add:"1"|divisibleby:1 %}
+  </div>
+  <!-- Col -->
+  {% endif %} 
+  {% endfor %}
+  </div>
+</section>
+{% endblock %}

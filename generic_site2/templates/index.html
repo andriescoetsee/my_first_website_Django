@@ -19,6 +19,16 @@
 		<div class="box-body">
 			<h1>Login to get started!</h1>
         </div>
+        <a href="{% url 'accounts:login_tutor' %}" class="btn btn-app">
+            <i class="fa fa-graduation-cap"></i> Tutor
+        </a>
+        <a href="{% url 'accounts:login_bible_study' %}" class="btn btn-app">
+            <i class="fa fa-book"></i> Bible Study
+        </a>
+        <a href="{% url 'accounts:login' %}" class="btn btn-app">
+            <i class="fa fa-plus"></i> Conference
+        </a>
+
     </div>
 </section>
 

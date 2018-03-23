@@ -5,20 +5,16 @@
 
 <section class="content-header">
 	<h1>
-		Tutor
+		Bible Study
         <small> Calendar </small>
     </h1>
-      <ol class="breadcrumb">
+<!--       <ol class="breadcrumb">
           <li>
             <button id="export-excel" type="button" class="btn btn-primary btn-flat btn-sm" data-toggle='tooltip' title="Export to Excel">
-<!--                 <i class="fa fa-spin fa-refresh"></i>&nbsp;  -->
                 Export
             </button>
           </li>
-<!--     	<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Layout</a></li>
-        <li class="active">Top Navigation</li> -->
-      </ol> 
+      </ol>  -->
 </section>
 
 <section class="content">
@@ -41,64 +37,37 @@
             <div class="box-body">
 
               <div class="form-group">
-                <label>Student</label>
-                <select id="student" class="form-control select2" style="width: 100%;">
-                  {% for student in students %}
-                    <option value={{student.id}} >{{student.name}}</option>
+                <label>Event Type</label>
+                <select id="event_type" class="form-control select2" style="width: 100%;">
+                  {% for event_type in event_types %}
+                    <option value={{event_type.id}} >{{event_type.name}}</option>
                   {% endfor %}
                 </select>
               </div>
 
              <div class="form-group">
-                <label>Tutor</label>
-                <select id="tutor" class="form-control select2" style="width: 100%;">
-                  {% for instructor in instructors %}
-                    <option value={{instructor.id}} >{{instructor.name}}</option>
-                  {% endfor %}
-                </select>
+                <label>Scripture</label>
+                    <div class="input-group">
+                    <input type="text" class="form-control" id="scripture" placeholder="scripture">
+                    <div class="input-group-addon">
+                      <i class="fa fa-book"></i>
+                    </div>
+                  </div>
               </div>
 
-             <div class="form-group">
-                <label>Session Type</label>
-                <select id="session_type" class="form-control select2" style="width: 100%;">
-                  {% for lesson_type in lesson_types %}
-                    <option value={{lesson_type.id}} >{{lesson_type.name}}</option>
-                  {% endfor %}
-                </select>
-              </div>
-
-              <!-- time Picker -->
-              <div class="bootstrap-timepicker">
                 <div class="form-group">
-                  <label>From Time:</label>
+                  <label>Note</label>
 
                   <div class="input-group">
-                    <input type="text" class="form-control timepicker" id="from-time" placeholder="HH:MI">
+                    <input type="text" class="form-control" id="note" placeholder="Note">
 
                     <div class="input-group-addon">
-                      <i class="fa fa-clock-o"></i>
+                      <i class="fa fa-file"></i>
                     </div>
                   </div>
                   <!-- /.input group -->
                 </div>
                 <!-- /.form group -->
-              </div>
-
-              <div class="bootstrap-timepicker">
-                <div class="form-group">
-                  <label>To Time:</label>
-
-                  <div class="input-group">
-                    <input type="text" class="form-control timepicker" id="to-time" placeholder="HH:MI">
-
-                    <div class="input-group-addon">
-                      <i class="fa fa-clock-o"></i>
-                    </div>
-                  </div>
-                  <!-- /.input group -->
-                </div>
-                <!-- /.form group -->
-              </div>
 
                 <div class="btn-group">
                     <button id="add-new-event" type="button" class="btn btn-primary btn-flat">Add</button>
@@ -146,8 +115,7 @@
     {{ block.super }}
     <script src="{% static 'bower_components/moment/moment.js' %}"></script>
     <script src="{% static 'bower_components/fullcalendar/dist/fullcalendar.min.js' %}"></script>
-    <script src="{% static 'myCalendar.js' %}"></script>
-
+    <script src="{% static 'myBibleStudyCalendar.js' %}"></script>
 {% endblock %}
 
 {% endblock %}

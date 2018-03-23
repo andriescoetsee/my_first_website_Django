@@ -1,0 +1,39 @@
+
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load bootstrap4 %}
+{% load filter_tags %}
+{% block content %}
+<form method="POST" action="{% url 'bible_study:update_dashboard' pk=object.pk %}">
+<section class="content-header">
+      <h1> Bible Study <small> Prayer Topics </small> </h1>
+</section>
+<section class="content center">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="box box-success">
+            <div class="box-header with-border">
+              <div class="row">
+                <div class="col-md-9">
+                  <span><h3 class="box-title">  Update </h3></span>
+                </div>
+                <div class="col-md-3">
+                  <button type="submit" class="btn btn-primary btn-flat btn-md">Save </button>
+                  <a class="btn btn-primary btn-flat btn-md" href="{% url 'bible_study:dashboard' %}" formnovalidate> Cancel</a>
+                </div>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <!-- text input -->
+                <div class="form-group">
+    	          {% csrf_token %}
+    	          {% bootstrap_form form %}
+                </div>
+            </div>
+      </div>
+    </div>
+  </div>
+</section>
+</form>
+{% endblock %}

@@ -1,0 +1,245 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load filter_tags %}
+{% block content %}
+
+<section class="content-header">
+	<h1>
+		Bible Study
+        <small> Dashboard</small>
+  </h1>
+<!--     <ol class="breadcrumb">
+    	<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Layout</a></li>
+        <li class="active">Top Navigation</li>
+    </ol> -->
+</section>
+<section class="content center">
+
+      <div class="row">
+        <div class="col-md-4">
+          <div class="box box-solid">
+            <div class="box-header with-border bg-red">
+              <h2 class="box-title">Announcements</h2>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="box-group" id="accordion">
+                {% for card in object_list|prayer_topics:"ANNOUNCEMENTS" %}
+                <div class="panel box box-danger">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{forloop.counter0}}">
+                        {{card.title}} 
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapse{{forloop.counter0}}" class="panel-collapse collapse">
+                    <div class="box-body">
+                      <h5> {{card.text}} </h5>
+                      <h5> {{ card.list_item1 }} </h5>
+                      <h5> {{ card.list_item2 }} </h5>
+                      <h5> {{ card.list_item3 }} </h5>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-4">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h4>{{scripture_next.title}}</h4>
+
+              <p>{{scripture_next.passage}}</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-bookmark"></i>
+            </div>
+            <a href="{% url 'bible_study:scripture_detail' pk=scripture_next.pk %}" class="small-box-footer">
+              More info <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+
+        <!-- ./col -->
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h4>{{scripture_prev.title}}</h4>
+
+              <p>{{scripture_prev.passage}}</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-bookmark"></i>
+            </div>
+            <a href="{% url 'bible_study:scripture_detail' pk=scripture_prev.pk %}" class="small-box-footer">
+              More info <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        <!-- ./col -->
+        </div>
+        <div class="col-md-4">
+          <!-- Widget: user widget style 1 -->
+          <div class="box box-widget widget-user-2">
+            <!-- Add the bg color to the header using any of the bg-* classes -->
+            <div class="widget-user-header bg-yellow">
+              <div class="widget-user-image">
+                <img class="img-circle" src="{% static 'dist/img/global2.jpg' %}" alt="User Avatar">
+              </div>
+              <!-- /.widget-user-image -->
+              <h4 class="widget-user-username">World Mission Prayer Topics</h4>
+            </div>
+            <div class="box-footer no-padding">
+              <ul class="nav nav-stacked">
+                {% for card in object_list|prayer_topics:"WORLD_MISSION_PRAYER_TOPICS" %}
+                <li> <a href="#">{{card.text}}</a></li>
+                <li><a href="#">{{ card.list_item1 }}</a></li>
+                {% if card.list_item2 %} 
+                  <li><a href="#">{{ card.list_item2 }}</a></li>
+                {% endif %}
+                {% if card.list_item3 %} 
+                <li><a href="#">{{ card.list_item3 }}</a></li>
+                {% endif %}
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+          <!-- /.widget-user -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+      <div class="row">
+        <div class="col-md-4">
+          <!-- Widget: user widget style 1 -->
+          <div class="box box-widget widget-user-2">
+            <!-- Add the bg color to the header using any of the bg-* classes -->
+            <div class="widget-user-header bg-green">
+              <div class="widget-user-image">
+                <img class="img-circle" src="{% static 'dist/img/ministry_prayer_topcis.jpg' %}" alt="User Avatar">
+              </div>
+              <!-- /.widget-user-image -->
+              <h4 class="widget-user-username">UWC Prayer Topics</h4>
+              <!-- <h5 class="widget-user-desc">Lead Developer</h5> -->
+            </div>
+            <div class="box-footer no-padding">
+              <ul class="nav nav-stacked">
+                {% for card in object_list|prayer_topics:"UWC_PRAYER_TOPICS"   %}
+                  <li><a href="#">{{card.text}} </a></li>
+                  <li><a href="#">{{ card.list_item1 }}</a></li>
+                  <li><a href="#">{{ card.list_item2}}</a></li>
+                  <li><a href="#">{{ card.list_item3 }}</a></li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+          <!-- /.widget-user -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-4">
+          <!-- Widget: user widget style 1 -->
+          <div class="box box-widget widget-user-2">
+            <!-- Add the bg color to the header using any of the bg-* classes -->
+            <div class="widget-user-header bg-green">
+              <div class="widget-user-image">
+                <img class="img-circle" src="{% static 'dist/img/ministry_prayer_topcis.jpg' %}" alt="User Avatar">
+              </div>
+              <!-- /.widget-user-image -->
+              <h3 class="widget-user-username">WITS Prayer Topics</h3>
+            </div>
+            <div class="box-footer no-padding">
+              <ul class="nav nav-stacked">
+                {% for card in object_list|prayer_topics:"WITS_PRAYER_TOPICS"  %}
+                  <li><a href="#">{{card.text}} </a></li>
+                  <li><a href="#">{{ card.list_item1 }}</a></li>
+                  <li><a href="#">{{ card.list_item2 }}</a></li>
+                  <li><a href="#">{{ card.list_item3 }}</a></li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+          <!-- /.widget-user -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-4">
+          <!-- Widget: user widget style 1 -->
+          <div class="box box-widget widget-user-2">
+            <!-- Add the bg color to the header using any of the bg-* classes -->
+            <div class="widget-user-header bg-green">
+              <div class="widget-user-image">
+                <img class="img-circle" src="{% static 'dist/img/ministry_prayer_topcis.jpg' %}" alt="User Avatar">
+              </div>
+              <!-- /.widget-user-image -->
+              <h3 class="widget-user-username">UP Prayer Topics</h3>
+            </div>
+            <div class="box-footer no-padding">
+              <ul class="nav nav-stacked">
+                {% for card in object_list|prayer_topics:"UP_PRAYER_TOPICS" %}
+                  <li><a href="#">{{card.text}} </a></li>
+                  <li><a href="#">{{ card.list_item1 }}</a></li>
+                  <li><a href="#">{{ card.list_item2}}</a></li>
+                  <li><a href="#">{{ card.list_item3 }}</a></li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+          <!-- /.widget-user -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+      
+      {% for card in object_list|prayer_topics:"PERSONAL_PRAYER_TOPICS" %}
+        {% if forloop.counter0|divisibleby:3 %}
+          <div class="row">
+        {% endif %} 
+        <div class="col-md-4">
+          <!-- Widget: user widget style 1 -->
+          <div class="box box-widget widget-user-2">
+            <!-- Add the bg color to the header using any of the bg-* classes -->
+            <div class="widget-user-header bg-blue">
+              <div class="widget-user-image">
+                <img class="img-circle" src="{% static 'dist/img/personal_prayer_topcis.jpg' %}" alt="User Avatar">
+              </div>
+              <!-- /.widget-user-image -->
+              <h3 class="widget-user-username">{% if card.user.first_name %} {{card.user.first_name}} {% else %} {{ card.user.email }} {% endif %}</h3>
+            </div>
+            <div class="box-footer no-padding">
+              <ul class="nav nav-stacked">
+                <li><a href="#">{{card.text}} </a></li>
+                {% if card.list_item1 %} 
+                  <li><a href="#">{{ card.list_item1 }}</a></li> 
+                {% endif %}
+                {% if card.list_item2 %} 
+                  <li><a href="#">{{ card.list_item2}}</a></li>
+                {% endif %}
+                {% if card.list_item3 %} 
+                <li><a href="#">{{ card.list_item3 }}</a></li>
+                {% endif %}
+                <li>
+                    <span class="direct-chat-timestamp pull-left" style="padding: 10px;"> {{card.update_date}}
+                    
+                    {% if user == card.user %}
+                      <a href="{% url 'bible_study:update_dashboard' pk=card.pk %}"> <i class="fa fa-pencil" ></i>
+                      </a>
+                    {% endif %}
+                    </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        {% if forloop.counter0|add:"1"|divisibleby:3 %}
+        </div>
+        {% endif %} 
+      {% endfor %}
+        </div>
+</section>
+
+{% endblock %}

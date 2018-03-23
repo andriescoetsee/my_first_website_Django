@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% load staticfiles %}
+{% block content %}
+
+<form method="POST"
+          action="{% url 'bible_study:question_update' pk=object.pk %}"
+>
+<section class="content-header">
+  <h1>
+    Bible Study
+        <small> Question Edit</small>
+  </h1>
+</section>
+<section class="content center">
+  <div class="row">
+    <div class="col-md-10">
+      <div class="box box-success">
+            <div class="box-header with-border">
+              <div class="row">
+                <div class="col-md-9">
+                  <h3>  <p>{{ object.scripture.title}}</p> </h3>
+                  <h5>  <p>{{object.scripture.book}} {{object.scripture.passage}}</p>  </h5>
+                  <h5>  <i>Key Verse: "{{ object.scripture.get_key_verse_text }} </i></h5>
+                </div>
+                <div class="col-md-3">
+                  <button type="submit" class="btn btn-primary btn-flat btn-md">Save </button>
+                  <a class="btn btn-primary btn-flat btn-md" href="{% url 'bible_study:scripture_list' %}" formnovalidate> Cancel</a>
+                </div>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <!-- text input -->
+                <div class="form-group">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                </div>
+            </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</form>
+
+{% endblock %}

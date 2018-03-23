@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Grow Learning</title>
+  <title>Grow Learning Portal</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -31,6 +31,9 @@
   <link rel="stylesheet" href="{% static 'dist/css/AdminLTE.min.css' %}" >
   <link rel="stylesheet" href="{% static 'dist/css/skins/skin-green.min.css' %}" >
 
+  <!-- bootstrap wysihtml5 - text editor -->
+  <link rel="stylesheet" href="{% static 'plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css' %}" >
+
   <!-- Pace style -->
   <link rel="stylesheet" href="{% static 'plugins/pace/pace.min.css' %}" >
 
@@ -45,7 +48,24 @@
     <nav class="navbar navbar-static-top">
       <div class="container">
         <div class="navbar-header">
-          <a href="{% url 'home' %}" class="navbar-brand"><b>GrowLearning</b></a>
+          <a href="{% url 'home' %}" class="navbar-brand">
+          {% if user.is_authenticated %}
+            
+            {% if user.is_superuser %}
+              <b>GrowLearning</b>
+            {% elif perms.accounts.tutor_participant %}
+              <b><i class="fa fa-graduation-cap"></i> Tutor </b>
+            {% elif perms.accounts.bible_study_participant %}
+              <span data-toggle="tooltip" title="May these words of my mouth and this meditation of my heart be pleasing in your sight, Lord, my Rock and my Redeemer.">
+                Psalm 19:14
+              </span>
+            {% elif perms.accounts.conference_participant %}
+              <b>GrowLearning Portal</b>
+            {% endif %}
+          {% else %}
+            GrowLearning Portal
+          {% endif %}
+          </a>
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
             <i class="fa fa-bars"></i>
           </button>
@@ -63,25 +83,54 @@
             </li>
             {% endif %}
 
-            {% if perms.accounts.tutor_participant %}
+            {% if perms.accounts.tutor_participant and not user.is_superuser%}
             <li><a href="{% url 'tutor:dashboard' %}"><i class="fa fa-dashboard" ></i> Dashboard </a></li>
             <li><a href="{% url 'tutor:calendar' %}"><i class="fa fa-calendar" ></i> Calendar </a></li>
             <li><a href="{% url 'tutor:all_sessions' %}"><i class="fa fa-list-ol" ></i> All Sessions </a></li>
             
             {% endif %}
 
-<!--             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li><a href="#">Separated link</a></li>
-                <li class="divider"></li>
-                <li><a href="#">One more separated link</a></li>
-              </ul>
-            </li> -->
+            {% if perms.accounts.bible_study_participant and not user.is_superuser %}
+            <li><a href="{% url 'bible_study:dashboard' %}"><i class="fa fa-dashboard" ></i> Dashboard </a></li>
+            <li><a href="{% url 'bible_study:calendar' %}"><i class="fa fa-calendar" ></i> Calendar </a></li>
+            <li><a href="{% url 'bible_study:scripture_list' %}"><i class="fa fa-list-ol" ></i> Other </a></li>
+            
+            {% endif %}
+
+            {% if user.is_superuser %}
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tutor 
+                  <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                  <li>
+                      <a href="{% url 'tutor:dashboard' %}"><i class="fa fa-dashboard" ></i> Dashboard </a>
+                  </li>
+                  <li>
+                      <a href="{% url 'tutor:calendar' %}"><i class="fa fa-calendar" ></i> Calendar </a>
+                  </li>
+                  <li>
+                      <a href="{% url 'tutor:all_sessions' %}"><i class="fa fa-list-ol" ></i> All Sessions </a>
+                  </li>
+                </ul>
+              </li> 
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bible Study
+                  <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                  <li>
+                      <a href="{% url 'bible_study:dashboard' %}"><i class="fa fa-dashboard" ></i> Dashboard </a>
+                  </li>
+                  <li>
+                      <a href="{% url 'bible_study:calendar' %}"><i class="fa fa-calendar" ></i> Calendar </a>
+                  </li>
+                  <li>
+                      <a href="{% url 'bible_study:scripture_list' %}"><i class="fa fa-list-ol" ></i> Bible Study List </a>
+                  </li>
+                </ul>
+              </li> 
+            {% endif %}
           {% endif %}
           </ul>
         </div>
@@ -106,7 +155,7 @@
             </li>
           {% else %}
             <li>
-                <a href="{% url 'accounts:login' %}"><i class="fa fa-sign-in"></i> Login </a>
+                <a href="{% url 'home' %}"><i class="fa fa-sign-in"></i> Login </a>
             </li>
           {% endif %}
           </ul>
@@ -143,26 +192,30 @@
 <script src="{% static 'bower_components/jquery-ui/jquery-ui.min.js' %}"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="{% static 'bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+<!-- FastClick -->
+<script src="{% static 'bower_components/fastclick/lib/fastclick.js' %}"></script>
 <!-- PACE -->
 <script src="{% static 'bower_components/PACE/pace.min.js' %}"></script> 
 <!-- bootstrap time picker -->
 <script src="{% static 'plugins/timepicker/bootstrap-timepicker.min.js' %}"></script>
-<!-- SlimScroll -->
-<script src="{% static 'bower_components/jquery-slimscroll/jquery.slimscroll.min.js' %}"></script>
-<!-- FastClick -->
-<script src="{% static 'bower_components/fastclick/lib/fastclick.js' %}"></script>
-  <!-- Pace style -->
- <!--  <link rel="stylesheet" href="{% static 'plugins/pace/pace.min.css' %}"> -->
 <!-- AdminLTE App -->
 <script src="{% static 'dist/js/adminlte.min.js' %}"></script>
 <!-- For the verse of the day -->
 <!--  <script src="http://www.ourmanna.com/verses/api/js/" type="text/javascript"></script> -->
+<script src="{% static 'plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js' %}"></script>
+    
 
 <script>
     $(function () {
     $('[data-toggle="tooltip"]').tooltip()
     })
 </script>
+<script>
+    $(function () {
+    $('#id_note').wysihtml5()
+    })
+</script>
+
 
 {% endblock %}
 
