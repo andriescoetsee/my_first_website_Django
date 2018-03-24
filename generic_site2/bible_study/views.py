@@ -46,7 +46,7 @@ from bible_study.utils.Word_Export import BibleStudyExportWord
 
 class DashboardListView( LoginRequiredMixin, PermissionRequiredMixin, ListView):
     redirect_field_name = 'bible_study/dashboardcard_list.html'
-    login_url = '/accounts/login_bible_study/'
+    login_url = '/accounts/login/bible_study/'
 
     permission_required = ('accounts.bible_study_participant',)
 
@@ -66,7 +66,7 @@ class DashboardListView( LoginRequiredMixin, PermissionRequiredMixin, ListView):
         return context
 
 class DashboardUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
-    login_url = '/accounts/login_bible_study/'
+    login_url = '/accounts/login/bible_study/'
     redirect_field_name = 'bible_study/dashboardcard_list.html'
 
     permission_required = ('accounts.bible_study_participant',)
@@ -77,7 +77,7 @@ class DashboardUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateVie
 
 class ScriptureListView( LoginRequiredMixin, PermissionRequiredMixin, ListView):
     redirect_field_name = 'bible_study/dashboardcard_list.html'
-    login_url = '/accounts/login_bible_study/'
+    login_url = '/accounts/login/bible_study/'
 
     permission_required = ('accounts.bible_study_participant')
 
@@ -93,13 +93,13 @@ class ScriptureListView( LoginRequiredMixin, PermissionRequiredMixin, ListView):
 
 class ScriptureDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     redirect_field_name = 'bible_study/dashboardcard_list.html'
-    login_url = '/accounts/login_bible_study/'
+    login_url = '/accounts/login/bible_study/'
     
     permission_required = ('accounts.bible_study_participant')
     model = Scripture
 
 class NoteUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
-    login_url = '/accounts/login_bible_study/'
+    login_url = '/accounts/login/bible_study/'
     redirect_field_name = 'bible_study/dashboardcard_list.html'
 
     permission_required = ('accounts.bible_study_participant','accounts.is_bible_study_admin')
@@ -110,7 +110,7 @@ class NoteUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
 
 class QuestionDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     redirect_field_name = 'bible_study/dashboardcard_list.html'
-    login_url = '/accounts/login_bible_study/'
+    login_url = '/accounts/login/bible_study/'
 
     template_name = 'bible_study/question_detail.html'
     
@@ -118,7 +118,7 @@ class QuestionDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView
     model = Scripture
 
 class QuestionUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
-    login_url = '/accounts/login_bible_study/'
+    login_url = '/accounts/login/bible_study/'
     redirect_field_name = 'bible_study/dashboardcard_list.html'
 
     permission_required = ('accounts.bible_study_participant','accounts.is_bible_study_admin')
@@ -128,7 +128,7 @@ class QuestionUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView
     model = Question
 
 class QuestionExportWord(LoginRequiredMixin,PermissionRequiredMixin, View):
-    login_url = '/accounts/login_bible_study/'
+    login_url = '/accounts/login/bible_study/'
     redirect_field_name = 'bible_study/dashboardcard_list.html'
 
     success_url = reverse_lazy('bible_study:scripture_list')
@@ -153,7 +153,7 @@ class QuestionExportWord(LoginRequiredMixin,PermissionRequiredMixin, View):
             return redirect('bible_study:scripture_detail', pk=scripture.pk)
 
 class NoteExportWord(LoginRequiredMixin,PermissionRequiredMixin, View):
-    login_url = '/accounts/login_bible_study/'
+    login_url = '/accounts/login/bible_study/'
     redirect_field_name = 'bible_study/dashboardcard_list.html'
 
     success_url = reverse_lazy('bible_study:scripture_list')
@@ -179,10 +179,10 @@ class NoteExportWord(LoginRequiredMixin,PermissionRequiredMixin, View):
 
 class BibleStudyCalendar(LoginRequiredMixin, PermissionRequiredMixin, TemplateView):
     template_name = 'bible_study/bible_study_calendar.html'
-    login_url = '/accounts/login_bible_study/'
+    login_url = '/accounts/login/bible_study/'
     redirect_field_name = 'bible_study/bible_study_calendar.html'
     
-    permission_required = ('accounts.bible_study_participant','accounts.is_bible_study_admin')
+    permission_required = ('accounts.bible_study_participant')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

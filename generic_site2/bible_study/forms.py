@@ -58,12 +58,12 @@ class NoteForm(forms.ModelForm):
     note = forms.CharField(required=False, 
                     widget=forms.Textarea(attrs={'rows': 75, 
                                                  'cols': 40,
-                                                 # 'data-html' : 'true'
-                                                # 'style' : "width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
-                                                 }))
+                                                 'data-html' : 'true'
+                                                  # 'class' : 'myNote'
+                                                }))
     
     class Meta:
-        fields = ("seq_nr", "verse_heading","verse","note")
+        fields = ("seq_nr", "verse_heading","note")
         model = Note
     
     def __init__(self, *args, **kwargs):
@@ -72,8 +72,7 @@ class NoteForm(forms.ModelForm):
         # for foreign key need to disable like this otherwise can disable like above
         # self.fields['scripture'].required = False
         # self.fields['scripture'].widget.attrs['disabled'] = 'disabled'
-        self.fields['verse'].required = False
-        self.fields['verse'].widget.attrs['disabled'] = 'disabled'
+        
         # self.fields["verse"].queryset =  Verse.objects.all()
 
     def clean_scripture(self):

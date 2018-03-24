@@ -141,13 +141,12 @@
       <!-- /.row -->
     </section>
 
-{% block scripts %}
-    <!-- block.super will get the content of the block from the parent template -->
-    {{ block.super }}
-    <script src="{% static 'bower_components/moment/moment.js' %}"></script>
-    <script src="{% static 'bower_components/fullcalendar/dist/fullcalendar.min.js' %}"></script>
+    <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="{% static 'bower_components/jquery-ui/jquery-ui.min.js' %}"></script>
+    
+    <!-- Bootstrap 3.3.7 Makes menu bar to loose dropdown
+    <script src="{% static 'bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>-->
     <script src="{% static 'myCalendar.js' %}"></script>
-
-{% endblock %}
 
 {% endblock %}

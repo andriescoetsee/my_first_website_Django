@@ -22,6 +22,8 @@
                   <h3>  <p>{{ object.scripture.title}}</p> </h3>
                   <h5>  <p>{{object.scripture.book}} {{object.scripture.passage}}</p>  </h5>
                   <h5>  <i>Key Verse: "{{ object.scripture.get_key_verse_text }} </i></h5>
+                  <br>
+                        <p>{{ object.verse.verse_text }} </p>
                 </div>
                 <div class="col-md-3">
                   <button type="submit" class="btn btn-primary btn-flat btn-md">Save </button>
@@ -43,5 +45,16 @@
 </section>
 
 </form>
+
+<!-- <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
+
+<script src="{% static 'bower_components/jquery-ui/jquery-ui.min.js' %}"></script>
+  
+<script>
+   $(function () {
+    //bootstrap WYSIHTML5 - text editor
+    // $('.myNote').wysihtml5()
+  })
+</script> -->
 
 {% endblock %}

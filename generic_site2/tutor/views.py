@@ -16,7 +16,7 @@ from django.contrib import messages
 
 class TutorEventListView( LoginRequiredMixin, PermissionRequiredMixin, ListView):
     redirect_field_name = 'tutor/event_list.html'
-    login_url = '/accounts/login/'
+    login_url = '/accounts/login/tutor/'
     
     permission_required = ('accounts.tutor_participant')
 
@@ -24,7 +24,7 @@ class TutorEventListView( LoginRequiredMixin, PermissionRequiredMixin, ListView)
 
 class TutorDashboard(LoginRequiredMixin, PermissionRequiredMixin, TemplateView):
     template_name = 'tutor/tutor_dashboard.html'
-    login_url = '/accounts/login/'
+    login_url = '/accounts/login/tutor/'
     redirect_field_name = 'tutor/tutor_dashboard.html'
     
     permission_required = ('accounts.tutor_participant','accounts.is_tutor_admin')
@@ -63,7 +63,7 @@ class TutorDashboard(LoginRequiredMixin, PermissionRequiredMixin, TemplateView):
 
 class TutorCalendar(LoginRequiredMixin, PermissionRequiredMixin, TemplateView):
     template_name = 'tutor/tutor_calendar.html'
-    login_url = '/accounts/login/'
+    login_url = '/accounts/login/tutor/'
     redirect_field_name = 'tutor/tutor_calendar.html'
     
     permission_required = ('accounts.tutor_participant','accounts.is_tutor_admin')
@@ -225,7 +225,7 @@ class TutorCalendar(LoginRequiredMixin, PermissionRequiredMixin, TemplateView):
 
 class EventExportExcel(LoginRequiredMixin,PermissionRequiredMixin, View):
     success_url = reverse_lazy('tutor:calendar')
-    login_url = '/accounts/login/'
+    login_url = '/accounts/login/tutor/'
     
     permission_required = ('accounts.tutor_participant','accounts.is_tutor_admin')
 

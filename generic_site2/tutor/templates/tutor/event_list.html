@@ -61,24 +61,15 @@
       <!-- /.row -->
     </section>
 
-{% block scripts %}
-    <!-- block.super will get the content of the block from the parent template -->
-    {{ block.super }}
-    <script src="{% static 'bower_components/datatables.net/js/jquery.dataTables.min.js' %}">
-    </script>
-    
-    <script src="{% static 'bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js' %}">
-    </script>
+    <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="{% static 'bower_components/jquery-ui/jquery-ui.min.js' %}"></script>
 
     <script>
     $(function () {
       $('#all-sessions').DataTable()
     })
     </script>
-
-{% endblock %}
-    <!-- DataTables -->
-
 
 {% endblock %}
 
