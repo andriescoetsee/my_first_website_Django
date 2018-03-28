@@ -3,8 +3,8 @@
 {% block content %}
 
 <section class="content-header">
-	<h1>
-		Bible Study
+  <h1>
+    Bible Study
         <small> Detail</small>
   </h1>
 </section>
@@ -21,10 +21,10 @@
   </div>
   {% endfor %}
 
-	 <div class="row">
+   <div class="row">
     <div class="col-md-10">
       <div class="box box-success">
-            <div class="box-header with-border">
+            <div class="box-header with-border" style=" background: #e5e4d7;">
               <div class="row">
                 <div class="col-md-9">
                   <h3>  <p>{{ object.title}}</p> </h3>
@@ -39,16 +39,16 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-			{% for note in object.notes.all %}
+      {% for note in object.notes.all %}
 
-<!-- 		box with header but no notes or scripture -->
-			{% if note.verse_heading and not note.note  %}
+<!--    box with header but no notes or scripture -->
+      {% if note.verse_heading and not note.note  %}
 
-          	<div class="box box-success">
-            	<div class="box-header with-border">
-              		<h5>
-      					<strong>{{ note.verse_heading|safe|linebreaks }}</strong>
-              		</h5>
+            <div class="box box-default" style=" background: #d2d6de; ">
+              <div class="box-header with-border">
+                  <h5>
+                <strong>{{ note.verse_heading|safe|linebreaks }}</strong>
+                  </h5>
 
 
                   <div class="box-tools pull-right">
@@ -57,101 +57,101 @@
                       </a>
                     {% endif %}
                   </div>
-              	
+
                 <!-- /.box-tools -->
-            	</div>
+              </div>
             <!-- /.box-header -->
-          	</div>
+            </div>
 
-			{% endif %}
+      {% endif %}
 
-			<!-- 		heading box with notes  -->
-			{% if note.verse_heading and note.note  %}
+      <!--    heading box with notes  -->
+      {% if note.verse_heading and note.note  %}
 
-          	<div class="box box-success collapsed-box">
-            	<div class="box-header with-border">
-              		<h5>
-      					<strong>{{ note.verse_heading|safe|linebreaks }}</strong>
-              		</h5>
+            <div class="box box collapsed-box" style="background: #d2d6de;">
+              <div class="box-header with-border">
+                  <h5>
+                <strong>{{ note.verse_heading|safe|linebreaks }}</strong>
+                  </h5>
 
-              		<div class="box-tools pull-right">
+                  <div class="box-tools pull-right">
                     {% if perms.accounts.is_bible_study_admin %}
                       <a href="{% url 'bible_study:note_update' pk=note.pk %}"><i class="fa fa-pencil"></i>
                       </a>
                     {% endif %}
-                		<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
-                		</button>
-              		</div>
-             	 <!-- /.box-tools -->
-            	</div>
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                    </button>
+                  </div>
+               <!-- /.box-tools -->
+              </div>
             <!-- /.box-header -->
             <div class="box-body">
-              
-          			<p data-html="true">
-            		{{ note.note|safe|linebreaks }}
-          			</p> 
+
+                <p data-html="true">
+                {{ note.note|safe|linebreaks }}
+                </p>
             </div>
             <!-- /.box-body -->
-          	</div>
-          	<!-- /.box -->
+            </div>
+            <!-- /.box -->
          {% endif %}
 
-         <!-- 		verse with notes  -->
-			{% if note.verse.verse_text and note.note  %}
+         <!--     verse with notes  -->
+      {% if note.verse.verse_text and note.note  %}
 
-          	<div class="box collapsed-box">
-            	<div class="box-header with-border">
-            		<div class="col-md-11">
-              		<h5>
-      					{{ note.verse.verse_text|safe|linebreaks }}
-              		</h5>
-              		</div>
-              		<div class="box-tools pull-right">
+            <div class="box collapsed-box" style="background: #e5e4d7;">
+              <div class="box-header with-border">
+                <div class="col-md-11">
+                  <h5>
+                {{ note.verse.verse_text|safe|linebreaks }}
+                  </h5>
+                  </div>
+                  <div class="box-tools pull-right">
                     {% if perms.accounts.is_bible_study_admin %}
                       <a href="{% url 'bible_study:note_update' pk=note.pk %}"><i class="fa fa-pencil"></i>
                       </a>
                     {% endif %}
-                		<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
-                		</button>
-              		</div>
-             	 <!-- /.box-tools -->
-            	</div>
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                    </button>
+                  </div>
+               <!-- /.box-tools -->
+              </div>
             <!-- /.box-header -->
             <div class="box-body">
-              
-          			<p data-html="true">
-            		{{ note.note|safe|linebreaks }}
-          			</p> 
+
+                <p data-html="true">
+                {{ note.note|safe|linebreaks }}
+                </p>
             </div>
             <!-- /.box-body -->
-          	</div>
-          	<!-- /.box -->
+            </div>
+            <!-- /.box -->
          {% endif %}
 
-         <!-- 		box with scripture but no notes  -->
-			{% if note.verse.verse_text and not note.note  %}
-          	<div class="box box">
-            	<div class="box-header with-border">
-            		<div class="col-md-11">
-              		<h5>
-      					 {{ note.verse.verse_text |safe|linebreaks }} 
-              		</h5>
-              		</div>
+         <!--     box with scripture but no notes  -->
+      {% if note.verse.verse_text and not note.note  %}
+            <div class="box box" style="background: #e5e4d7;">
+              <div class="box-header with-border">
+                <div class="col-md-11">
+                  <h5>
+                 {{ note.verse.verse_text |safe|linebreaks }}
+                  </h5>
+                  </div>
                    <div class="box-tools pull-right">
                      {% if perms.accounts.is_bible_study_admin %}
                       <a href="{% url 'bible_study:note_update' pk=note.pk %}"><i class="fa fa-pencil"></i>
                       </a>
                     {% endif %}
                   </div>
-              	<!-- /.box-tools -->
-            	</div>
+                <!-- /.box-tools -->
+              </div>
             <!-- /.box-header -->
-          	</div>
+            </div>
 
-			{% endif %}
+      {% endif %}
 
 
-    	{% endfor %}
+      {% endfor %}
         </div>
     </div>
 </div>

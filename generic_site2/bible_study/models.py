@@ -47,7 +47,34 @@ class DashboardCard(models.Model):
         ordering : ['card_type','update_date', 'user']
 
     def get_api_announcement_text(self):
-        return self.title + " " + self.text
+        
+        anouncement = self.text
+
+        if self.list_item1:
+            anouncement += "#" + self.list_item1
+
+        if self.list_item2:
+            anouncement += "#" + self.list_item2
+
+        if self.list_item3:
+            anouncement += "#" + self.list_item3
+
+        return anouncement
+
+    def get_api_prayer_topic_text(self):
+
+        pt = self.text
+
+        if self.list_item1:
+            pt += "#" + self.list_item1
+
+        if self.list_item2:
+            pt += "#" + self.list_item2
+
+        if self.list_item3:
+            pt += "#" + self.list_item3
+            
+        return pt
 
     def get_absolute_url(self):
         return reverse("bible_study:dashboard")

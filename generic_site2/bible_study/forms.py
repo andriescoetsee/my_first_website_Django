@@ -54,12 +54,22 @@ class DashboardForm(forms.ModelForm):
 
 class NoteForm(forms.ModelForm):
 
-    verse_heading = forms.CharField(required=False, widget=forms.Textarea(attrs={'rows': 1, 'cols': 40}))
+    seq_nr = forms.IntegerField(required=False, 
+                    widget=forms.Textarea(attrs={'rows': 1, 
+                                                'cols': 40,
+                                                'style' : "background: #d2d6de;"
+                                                 }))
+
+    verse_heading = forms.CharField(required=False, 
+                    widget=forms.Textarea(attrs={'rows': 1, 
+                                                'cols': 40,
+                                                'style' : "background: #d2d6de;"
+                                                 }))
     note = forms.CharField(required=False, 
                     widget=forms.Textarea(attrs={'rows': 75, 
                                                  'cols': 40,
-                                                 'data-html' : 'true'
-                                                  # 'class' : 'myNote'
+                                                 'data-html' : 'true',
+                                                  'style' : "background: #e5e4d7;"
                                                 }))
     
     class Meta:
@@ -101,8 +111,7 @@ class QuestionForm(forms.ModelForm):
     question = forms.CharField(required=False, 
                     widget=forms.Textarea(attrs={'rows': 10, 
                                                  'cols': 40,
-                                                #  'data-html' : 'true'
-                                                # # 'style' : "width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
+                                                 'style' : "background: #ffffcc;"
                                                  }))
     
     class Meta:

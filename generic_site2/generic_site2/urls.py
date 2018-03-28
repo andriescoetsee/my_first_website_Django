@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from rest_framework.authtoken.views import obtain_auth_token
 from . import views
 
 urlpatterns = [
@@ -26,4 +27,6 @@ urlpatterns = [
 	url(r"^thanks/$", views.ThanksPage.as_view(), name="thanks"),
     url(r"^tutor/", include("tutor.urls")),
     url(r"^bible_study/", include("bible_study.urls")),
+    url(r'^api/', include("rest_api.urls")),
+    url(r'^api-token-auth/', obtain_auth_token),
 ]

@@ -3,7 +3,7 @@
 import os
 
 #os.chdir("C:/Users/Andries Coetsee/myWebsite2/generic_site2/tutor/utils")
-os.chdir("/home/growlearning/my_base/myWebsite2/generic_site2/tutor/utils")
+os.chdir("/home/growlearning/myWebsite/generic_site2")
 os.environ['DJANGO_SETTINGS_MODULE'] = 'generic_site2.settings'
 
 import django
@@ -24,7 +24,7 @@ sms_msg = "Daily Tutor " + tomorrow.strftime('%Y-%m-%d') + " :-) "
 if tomorrow_name == 'Sunday':
     print("Tomorrow is Sabbath day - rest")
 else:
-    sessions = Event.objects.filter(date_and_time__date=tomorrow).order_by('from_time')
+    sessions = Event.objects.filter(day_dt=tomorrow).order_by('from_time')
     if sessions.exists():
         for session in sessions :
             sms_msg += session.daily_SMS_format()
