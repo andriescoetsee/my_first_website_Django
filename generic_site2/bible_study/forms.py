@@ -22,27 +22,27 @@ User = get_user_model()
 class DashboardForm(forms.ModelForm):
 
     text = forms.CharField(required=True, label="Description", widget=forms.Textarea(attrs={
-                                            'rows': 2, 
+                                            'rows': 3, 
                                             'cols': 40,
                                             'class': "form-control"
                                             }))
 
     list_item1 = forms.CharField(required=False, label="Prayer Topic 1", widget=forms.Textarea(attrs={
-                                            'rows': 2, 
+                                            'rows': 3, 
                                             'cols': 40,
                                             'class': "form-control",
                                             'placeholder' : 'Prayer Topic'
                                             }))
 
     list_item2 = forms.CharField(required=False, label="Prayer Topic 2", widget=forms.Textarea(attrs={
-                                            'rows': 2, 
+                                            'rows': 3, 
                                             'cols': 40,
                                             'class': "form-control",
                                             'placeholder' : 'Prayer Topic'
                                             }))
 
     list_item3 = forms.CharField(required=False, label="Prayer Topic 3", widget=forms.Textarea(attrs={
-                                            'rows': 2, 
+                                            'rows': 3, 
                                             'cols': 40,
                                             'class': "form-control",
                                             'placeholder' : 'Prayer Topic'

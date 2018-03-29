@@ -38,9 +38,9 @@ class DashboardCard(models.Model):
     image = models.TextField(max_length=50, blank=True, null=True, default="")
     title = models.TextField(max_length=100, blank=True, null=True)
     text  = models.TextField(max_length=250, blank=True, null=True)
-    list_item1 = models.TextField(max_length=100, blank=True, null=True, default="")
-    list_item2 = models.TextField(max_length=100, blank=True, null=True, default="")
-    list_item3 = models.TextField(max_length=100, blank=True, null=True, default="")
+    list_item1 = models.TextField(max_length=250, blank=True, null=True, default="")
+    list_item2 = models.TextField(max_length=250, blank=True, null=True, default="")
+    list_item3 = models.TextField(max_length=250, blank=True, null=True, default="")
     link = models.TextField(max_length=100, blank=True, null=True, default="")
 
     class Meta:
