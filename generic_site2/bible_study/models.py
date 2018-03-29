@@ -144,7 +144,7 @@ class Scripture(models.Model):
         return reverse("bible_study:dashboard")
 
     def __str__(self):
-        return self.book + " " + self.passage + ":" + self.title  
+        return self.book + " " + self.passage 
 
     def get_passage_api(self):
         return self.book + " " + self.passage
@@ -285,7 +285,7 @@ class Question(models.Model):
         return reverse("bible_study:list_scripture")
 
     def __str__(self):
-        return self.scripture.__str__() + " :" + str(self.from_verse) + " - " + str(self.to_verse)
+        return str(self.from_verse) + " - " + str(self.to_verse)
 
 class MyAnswer(models.Model):
     user = models.ForeignKey(User, related_name='question_answers', on_delete=models.CASCADE )

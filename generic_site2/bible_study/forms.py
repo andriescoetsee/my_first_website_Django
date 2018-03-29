@@ -3,21 +3,35 @@ from django import forms
 from django.shortcuts import get_object_or_404
 
 from bible_study.models import (
-                                # Scripture,
+                                Scripture,
                                 Verse,
                                 Note, 
-                                # BibleStudyEvent, 
+                                BibleStudyEvent, 
                                 # MyAnswer,
                                 # MyNote,
                                 # Post,
                                 DashboardCard,
-                                # BibleStudyEventType,
+                                BibleStudyEventType,
                                 # BibleStudyUser
                                 Question
                                 )
 
 from django.contrib.auth import get_user_model
 User = get_user_model()
+
+class ScriptureForm(forms.ModelForm):
+
+    title = forms.CharField(required=True, widget=forms.Textarea(attrs={'rows': 1, 'cols': 40}))
+    book = forms.CharField(required=True, widget=forms.Textarea(attrs={'rows': 1, 'cols': 40}))
+    passage = forms.CharField(required=True, widget=forms.Textarea(attrs={'rows': 1, 'cols': 40}))
+    main_point = forms.CharField(required=False, widget=forms.Textarea(attrs={'rows': 5, 'cols': 40}))
+    summary = forms.CharField(required=False, widget=forms.Textarea(attrs={'rows': 5, 'cols': 40}))
+    key_verse = forms.CharField(required=True, widget=forms.Textarea(attrs={'rows': 1, 'cols': 40}))
+    
+    class Meta:
+        fields = ("title", "book","passage", "key_verse", "status","notes_completed","main_point", "summary",)
+        model = Scripture
+
 
 class DashboardForm(forms.ModelForm):
 
@@ -103,8 +117,6 @@ class NoteForm(forms.ModelForm):
 
 class QuestionForm(forms.ModelForm):
 
-
-
     from_verse = forms.IntegerField(required=True, widget=forms.TextInput(attrs={'type':'number'}))
     to_verse = forms.IntegerField(required=True, widget=forms.TextInput(attrs={'type':'number'}))
     
@@ -121,3 +133,35 @@ class QuestionForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+class DashboardForm(forms.ModelForm):
+
+    text = forms.CharField(required=True, label="Description", widget=forms.Textarea(attrs={
+                                            'rows': 3, 
+                                            'cols': 40,
+                                            'style': "background: #c2f0c2; ",
+                                            }))
+
+    list_item1 = forms.CharField(required=False, label="Prayer Topic 1", widget=forms.Textarea(attrs={
+                                            'rows': 2, 
+                                            'cols': 40,
+                                            'style': "background: #c2f0c2; ",
+                                            'placeholder' : 'Prayer Topic'
+                                            }))
+
+    list_item2 = forms.CharField(required=False, label="Prayer Topic 2", widget=forms.Textarea(attrs={
+                                            'rows': 2, 
+                                            'cols': 40,
+                                            'style': "background: #c2f0c2;",
+                                            'placeholder' : 'Prayer Topic'
+                                            }))
+
+    list_item3 = forms.CharField(required=False, label="Prayer Topic 3", widget=forms.Textarea(attrs={
+                                            'rows': 2, 
+                                            'cols': 40,
+                                            'style': "background: #c2f0c2;",
+                                            'placeholder' : 'Prayer Topic'
+                                            }))
+
+    class Meta:
+        fields = ['text','list_item1','list_item2','list_item3']
+        model = DashboardCard
