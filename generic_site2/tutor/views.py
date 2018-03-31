@@ -216,11 +216,15 @@ class TutorCalendar(LoginRequiredMixin, PermissionRequiredMixin, TemplateView):
     def update_event(self, request) :
 
         event = Event.objects.get(pk=request.POST['id'])
-        event.day_dt=request.POST['date'][0:10]
+       
+        event.day_dt= date(int(request.POST['date'][0:4]), int(request.POST['date'][5:7]),int(request.POST['date'][8:10]))
+        
         from_time=request.POST['start_tm'][0:5]
         to_time=request.POST['end_tm'][0:5]
         event.save()
-        
+
+        # print("from: ", event.from_time)
+        # print("to: ",event.to_time)
         return 'true'
 
 class EventExportExcel(LoginRequiredMixin,PermissionRequiredMixin, View):

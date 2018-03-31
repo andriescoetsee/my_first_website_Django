@@ -37,7 +37,8 @@ $(document).ready(function () {
 
   //Timepicker
   $('.timepicker').timepicker({
-      showInputs: false
+      showInputs: false,
+      showMeridian : false
   })
 
 
@@ -88,6 +89,16 @@ $(document).ready(function () {
         week : 'week',
         day  : 'day'
       },
+      // setDefaults ( {
+      //   axisFormat : "HH:mm",
+      //   timeFormat : {
+      //     agenda : "H:mm{ - h:mm}"
+      //   },
+      // minTime : 8,
+      // maxTime : 24
+      // }),
+      slotLabelFormat : "HH:mm",
+      timeFormat : 'H:mm',
       //Random default events
       events    : "/tutor/calendar/",
       editable  : true,
@@ -227,6 +238,10 @@ $(document).ready(function () {
       },
       eventDrop: function (event, delta, revertFunc) {
              
+            /// we need to set event.start_tm, event.end_tm correctly
+            // console.log(event.start.format());
+            // console.log(event.end.format());
+
              $.ajax({
                         type: 'POST',
                         url: "/tutor/calendar/",
@@ -256,6 +271,10 @@ $(document).ready(function () {
         }, // eventDrop
       eventResize: function (event, delta, revertFunc) {
              
+            /// we need to set event.start_tm, event.end_tm correctly
+            // console.log(event.start.format());
+            // console.log(event.end.format());
+
              $.ajax({
                         type: 'POST',
                         url: "/tutor/calendar/",
